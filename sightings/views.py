@@ -47,32 +47,36 @@ def update(request, unique_squirrel_id):
         usid = request.POST.get('unique_squirrel_id', '')
         form = SquirrelForm(request.POST, instance=instance)
     else:
-        usid = reuqest.GET.get('unique_squirrel_id', '')
+        usid = request.GET.get('unique_squirrel_id', '')
         form = SquirrelForm(instance=instance)
 
-    # validate inputs
-    if usid == '':
-        return render(request, 'sightings/update.html', { 'form': form })
-    elif form.is_valid():
-        form.save()
-    else:
-        return render(request, 'sightings/error.html', { 'error': form.errors })
+    # handle request
+    success_msg = 'Congradulations! Your record is updated.'
+    return handleGeneralRequest(request, form, usid == '', unique_squirrel_id, success_msg)
 
 def add(request):
     if request.method == 'POST':
         usid = request.POST.get('unique_squirrel_id', '')
         form = SquirrelForm(request.POST)
     else:
-        usid = reuqest.GET.get('unique_squirrel_id', '')
+        usid = request.GET.get('unique_squirrel_id', '')
         form = SquirrelForm()
 
-
-
-    if form.is_valid():
-        squirrel = form.save()
-        return JsonResponse({ 'success': True, 'error': None })
-    return JsonResponse({ 'success': False, 'error': None })
+    # handle request
+    success_msg = 'Congradulations! Your record is added.'
+    return handleGeneralRequest(request, form, usid == '', 'add', success_msg)
 
 def stats(reuqest):
     return render(request, 'sightings/index.html', context)
-# Create your views here.
+
+''' aux functions
+'''
+def handleGeneralRequest(request, form, render_blank_form, action_url, success_msg):
+    # validate inputs
+    if render_blank_form:
+        return render(request, 'sightings/general.html', { 'url': action_url, 'form': form })
+    elif form.is_valid():
+        form.save()
+        return render(request, 'sightings/success.html', { 'message': success_msg } )
+    else:
+        return render(request, 'sightings/error.html', { 'error': form.errors })

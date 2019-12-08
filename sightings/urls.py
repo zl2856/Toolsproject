@@ -6,8 +6,8 @@ from django.contrib import admin
 
 urlpatterns = [
     path('', views.list),
-    path('<unique_squirrel_id>', views.update),
     path('add', views.add),
+    path('<unique_squirrel_id>', views.update),
     path('stats',views.stats),
 ]
 
