@@ -33,9 +33,9 @@ class Command(BaseCommand):
 
             date = str(row['Date'])
             cn, created = Squirrel.objects.get_or_create(
-                    Latitude=row['Y'],
-                    Longitude=row['X'],
-                    Unique_Squirrel_id=row['Unique Squirrel ID'],
+                    latitude=row['Y'],
+                    longitude=row['X'],
+                    unique_Squirrel_id=row['Unique Squirrel ID'],
                     Shift=row['Shift'],
                     Date=datetime.date(int(date[4:]), int(date[:2]), int(date[2:4])),
                     Age=s_age,
