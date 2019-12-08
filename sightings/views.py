@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.forms import ModelForm
 from .models import Squirrel
+from django.core.exceptions import ObjectDoesNotExist
 from django.utils.translation import gettext_lazy as _
 
 class SquirrelForm(ModelForm):
@@ -33,23 +34,39 @@ def list(request):
 
 
 def update(request, unique_squirrel_id):
-    instance = Squirrel.objects.get(unique_squirrel_id=unique_squirrel_id)
+    # get instance from database. If usid doesn't exist, program will raise a
+    # DoesNotExist exception. 
+    try:
+        instance = Squirrel.objects.get(unique_squirrel_id=unique_squirrel_id)
+    except ObjectDoesNotExist:
+        err_msg = 'Instance squirrel <{}> doesn\'t exist'.format(unique_squirrel_id)
+        return render(request, 'sightings/error.html', { 'error': err_msg })
+
+    # get parameters
     if request.method == 'POST':
+        usid = request.POST.get('unique_squirrel_id', '')
         form = SquirrelForm(request.POST, instance=instance)
     else:
+        usid = reuqest.GET.get('unique_squirrel_id', '')
         form = SquirrelForm(instance=instance)
-    
-    if form.is_valid():
-        form.save()
-        return JsonResponse({ 'success': True, 'error': None })
-    else:
-        return JsonResponse({ 'success': True, 'error': None })
 
-def create(request):
+    # validate inputs
+    if usid == '':
+        return render(request, 'sightings/update.html', { 'form': form })
+    elif form.is_valid():
+        form.save()
+    else:
+        return render(request, 'sightings/error.html', { 'error': form.errors })
+
+def add(request):
     if request.method == 'POST':
+        usid = request.POST.get('unique_squirrel_id', '')
         form = SquirrelForm(request.POST)
     else:
+        usid = reuqest.GET.get('unique_squirrel_id', '')
         form = SquirrelForm()
+
+
 
     if form.is_valid():
         squirrel = form.save()
