@@ -1,3 +1,8 @@
-.helptext {
-    display: none;
+.fa.fa-edit {
+    cursor: pointer;
+    color: #EEEEEE;
+}
+
+.fa.fa-edit:hover {
+    color: black;
 }

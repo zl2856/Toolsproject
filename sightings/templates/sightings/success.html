@@ -17,5 +17,17 @@
     <div class="alert alert-success" role="alert">
       {{ message }}
     </div>
+    <div class="alert alert-info" role="alert">
+      You will be redirected back to home page in <span id="timer">5</span> seconds
+    </div>
+    <script type="text/javascript">
+      let start = 5;
+      setInterval(function(){ 
+        $("#timer").html(--start);
+        if (start == 0) {
+            window.location.href = '/sightings';
+        }
+      }, 1000);
+    </script>
 </body>
 </html>
