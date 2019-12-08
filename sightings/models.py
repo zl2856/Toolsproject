@@ -29,11 +29,6 @@ class Squirrel(models.Model):
     ]
 
     # model members
-    Other=models.CharField(
-            max_length=10,
-            default='Other',
-            help_text=_('Type of squirrel')
-            )
     latitude = models.FloatField(help_text=_('Latitude of squirrels'))
     longitude = models.FloatField(help_text=_('Longitude of squirrels'))
     unique_squirrel_id = models.CharField(

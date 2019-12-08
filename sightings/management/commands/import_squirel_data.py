@@ -15,45 +15,29 @@ class Command(BaseCommand):
 
         for i in range(len(df)):
             row = df.loc[i]
-            if row['Age'] not in ['Adult', 'Juvenile']:
-                # store squirrel's age = s_age
-                s_age = Squirrel.Other
-            else:
-                s_age = row['Age']
-  
-            if row['Primary Fur Color'] not in ['Grey', 'Cinnamon', 'Black']:
-                s_color = Squirrel.Other
-            else:
-                s_color = row['Primary Fur Color']
-
-            if row['Location'] not in ['Ground Plane', 'Above Ground',]:
-                s_location = Squirrel.Other
-            else:
-                s_location = row['Location']
-
             date = str(row['Date'])
             cn, created = Squirrel.objects.get_or_create(
                     latitude=row['Y'],
                     longitude=row['X'],
-                    unique_Squirrel_id=row['Unique Squirrel ID'],
+                    unique_squirrel_id=row['Unique Squirrel ID'],
                     shift=row['Shift'],
                     date=datetime.date(int(date[4:]), int(date[:2]), int(date[2:4])),
-                    age=s_age,
-                    primary_Fur_Color=s_color,
-                    location=s_location,
-                    specific_Location=row['Specific Location'],
-                    Running=row['Running'],
-                    Chasing=row['Chasing'],
-                    Climbing=row['Climbing'],
-                    Eating=row['Eating'],
-                    Foraging=row['Foraging'],
-                    Other_Activities=row['Other Activities'],
-                    Kuks=row['Kuks'],
-                    Quaas=row['Quaas'],
-                    Moans=row['Moans'],
-                    Tail_Flags=row['Tail flags'],
-                    Tail_Twitches=row['Tail twitches'],
-                    Approaches=row['Approaches'],
-                    Indifferent=row['Indifferent'],
-                    Runs_From=row['Runs from']
+                    age=row['Age'],
+                    primary_fur_color=row['Primary Fur Color'],
+                    location=row['Location'],
+                    specific_location=row['Specific Location'],
+                    running=row['Running'],
+                    chasing=row['Chasing'],
+                    climbing=row['Climbing'],
+                    eating=row['Eating'],
+                    foraging=row['Foraging'],
+                    other_activities=row['Other Activities'],
+                    kuks=row['Kuks'],
+                    quaas=row['Quaas'],
+                    moans=row['Moans'],
+                    tail_flags=row['Tail flags'],
+                    tail_twitches=row['Tail twitches'],
+                    approaches=row['Approaches'],
+                    indifferent=row['Indifferent'],
+                    runs_from=row['Runs from']
                     )
