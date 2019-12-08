@@ -66,6 +66,7 @@ def add(request):
     success_msg = 'Congradulations! Your record is added.'
     return handleGeneralRequest(request, form, usid == '', 'add', success_msg)
 
+    #count 
 def stats(request):
     stat = {
         'running_cnt': Squirrel.objects.filter(running=True).count(), 
