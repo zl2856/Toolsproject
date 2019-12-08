@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Squirrel Sightings</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            <button class="btn btn-outline-primary my-2 my-sm-0">Return</button>
+        </button>
+    </nav>
+    <div class="container-fluid main-container">
+    <table class="table" id="main-table">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">Running</th>
+                <th scope="col">Chasing</th>
+                <th scope="col">Climbing</th>
+                <th scope="col">Eating</th>
+                <th scope="col">Foraging</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>{{ running_cnt }}</td>
+            <td>{{ chasing_cnt }}</td>
+            <td>{{ climbing_cnt }}</td>
+            <td>{{ eating_cnt }}</td>
+            <td>{{ foraging_cnt }}</td>
+        </tr>
+        </tbody>
+    </table>
+    </div>
+    <script type="text/javascript">
+        $('nav button').click(function() {
+            window.location.href = '/sightings';
+        });
+    </script>
+</body>
+</html>

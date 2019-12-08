@@ -14,7 +14,8 @@
         <a class="navbar-brand" href="#">Squirrel Sightings</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">New Record</button>
+            <button class="btn btn-outline-success my-2 my-sm-0 new-btn">New Record</button>
+            <button class="btn btn-outline-primary my-2 my-sm-0 stat-btn">Statistic</button>
         </button>
     </nav>
     <div class="container-fluid main-container">
@@ -78,8 +79,12 @@
     </table>
     </div>
     <script type="text/javascript">
-        $('nav button').click(function() {
+        $('nav .new-btn').click(function() {
             window.location.href = '/sightings/add';
+        });
+
+        $('nav .stat-btn').click(function() {
+            window.location.href = '/sightings/stats';
         });
 
         $('#main-table').on('click', '.fa.fa-edit', function() {

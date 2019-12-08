@@ -66,8 +66,16 @@ def add(request):
     success_msg = 'Congradulations! Your record is added.'
     return handleGeneralRequest(request, form, usid == '', 'add', success_msg)
 
-def stats(reuqest):
-    return render(request, 'sightings/index.html', context)
+def stats(request):
+    stat = {
+        'running_cnt': Squirrel.objects.filter(running=True).count(), 
+        'chasing_cnt': Squirrel.objects.filter(chasing=True).count(), 
+        'climbing_cnt': Squirrel.objects.filter(climbing=True).count(), 
+        'eating_cnt': Squirrel.objects.filter(eating=True).count(), 
+        'foraging_cnt': Squirrel.objects.filter(foraging=True).count(), 
+    }
+    print(stat)
+    return render(request, 'sightings/stats.html', stat)
 
 ''' aux functions
 '''
