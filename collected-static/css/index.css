@@ -1,0 +1,8 @@
+.fa.fa-edit {
+    cursor: pointer;
+    color: #CCCCCC;
+}
+
+.fa.fa-edit:hover {
+    color: black;
+}
